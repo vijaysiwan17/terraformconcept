@@ -12,3 +12,5 @@ private_subnet1_name             = "private1"
 private_subnet1_address_prefixes = ["172.16.10.0/24"]
 private_subnet2_name             = "private2"
 private_subnet2_address_prefixes = ["172.16.11.0/24"]
+admin_username                   = "vijay"
+admin_password                   = "Hello@password"

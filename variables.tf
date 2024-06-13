@@ -16,6 +16,17 @@ variable "virtual_network_address_space" {
   default = ["10.0.0.0/16"]
 
 }
+variable "admin_username" {
+  type      = string
+  sensitive = true
+
+
+}
+variable "admin_password" {
+  type      = string
+  sensitive = true
+
+}
 
 
 
