@@ -23,7 +23,7 @@ resource "azurerm_storage_share" "myshare" {
 
 }
 
-
+#oneline comment 
 
 
 
