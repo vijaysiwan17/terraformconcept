@@ -1,40 +1,40 @@
-resource "azurerm_storage_account" "mystorage" {
-  name                = "stvijay9964"
-  resource_group_name = azurerm_resource_group.myrg.name
-
-  location                 = azurerm_resource_group.myrg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-
-
-  tags = {
-    environment = "staging"
-    Name        = "staging"
-  }
-}
-/*resource "azurerm_storage_share_file" "myshare" {
-  name             = "fileshare1"
-  storage_share_id = azurerm_storage_share.myshare.id
-}*/
-resource "azurerm_storage_share" "myshare" {
-  name                 = "fileshare1"
-  storage_account_name = azurerm_storage_account.mystorage.name
-  quota                = 50
-
-}
-
-#oneline comment 
-
-
-
-
 resource "azurerm_resource_group" "myrg" {
-  name     = "myrg"
-  location = "eastus"
+  name     = var.resource_group_name
+  location = var.resource_group_location
 
-  tags = {
-    environment = "staging"
-    Name        = "staging"
-  }
+
+}
+resource "azurerm_virtual_network" "myvnet" {
+  name                = var.virtual_network_name
+  location            = azurerm_resource_group.myrg.location
+  resource_group_name = azurerm_resource_group.myrg.name
+  address_space       = var.virtual_network_address_space
+
+
+}
+resource "azurerm_subnet" "public_subnet1" {
+  name                 = var.public_subnet1_name
+  resource_group_name  = azurerm_resource_group.myrg.name
+  virtual_network_name = azurerm_virtual_network.myvnet.name
+  address_prefixes     = var.public_subnet1_address_prefixes
+}
+resource "azurerm_subnet" "public_subnet2" {
+  name                 = var.public_subnet2_name
+  resource_group_name  = azurerm_resource_group.myrg.name
+  virtual_network_name = azurerm_virtual_network.myvnet.name
+  address_prefixes     = var.public_subnet2_address_prefixes
+}
+resource "azurerm_subnet" "private_subnet1" {
+  name                 = var.private_subnet1_name
+  resource_group_name  = azurerm_resource_group.myrg.name
+  virtual_network_name = azurerm_virtual_network.myvnet.name
+  address_prefixes     = var.private_subnet1_address_prefixes
+}
+
+resource "azurerm_subnet" "private_subnet2" {
+  name                 = var.private_subnet2_name
+  resource_group_name  = azurerm_resource_group.myrg.name
+  virtual_network_name = azurerm_virtual_network.myvnet.name
+  address_prefixes     = var.private_subnet2_address_prefixes
 }
 
